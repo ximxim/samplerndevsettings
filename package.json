@@ -24,6 +24,7 @@
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.65.0",
     "@types/react-test-renderer": "^17.0.1",
+    "@welldone-software/why-did-you-render": "^6.2.1",
     "babel-jest": "^26.6.3",
     "eslint": "^7.14.0",
     "jest": "^26.6.3",

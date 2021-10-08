@@ -8,7 +8,8 @@
  * @format
  */
 
-import React from 'react';
+import {DevSettings} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {enableScreens} from 'react-native-screens';
@@ -20,7 +21,26 @@ enableScreens(false);
 
 const Tab = createBottomTabNavigator();
 
+if (process.env.NODE_ENV === 'development') {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  whyDidYouRender(React, {trackAllPureComponents: false});
+}
+
 const App = () => {
+  const [trackAllPureComponents, setTrackAllPureComponents] = useState(false);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      const whyDidYouRender = require('@welldone-software/why-did-you-render');
+      whyDidYouRender.wdyrStore.options.trackAllPureComponents =
+        trackAllPureComponents;
+    }
+
+    DevSettings.addMenuItem('Toggle whyDidYouRender', () => {
+      setTrackAllPureComponents(val => !val);
+    });
+  }, [trackAllPureComponents]);
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>

@@ -1,10 +1,21 @@
 import React, {FunctionComponent} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 
-export const CenteredView: FunctionComponent = ({children}) => {
+export const CenteredView: FunctionComponent<TouchableOpacityProps> = ({
+  children,
+  ...touchableOpacityProps
+}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{children}</Text>
+      <TouchableOpacity {...touchableOpacityProps}>
+        <Text style={styles.text}>{children}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
